@@ -15,8 +15,8 @@ import (
 )
 
 func main() {
-    //创建一个新连接池
-    pool := redis.NewPool("localhost","6379","passwd")
+    //创建一个新连接池输入redis的ip,port,passwd
+    pool := redisop.NewPool("localhost","6379","passwd")
     defer pool.Close()
     conn := pool.Get()
     defer conn.Close()
@@ -28,4 +28,6 @@ func main() {
     output,_ := redis.String(conn.Do("get","bgops"))
     fmt.Println("blog url:",output)
 }
+$ go run test-conn.go
+blog url: https://xxbandy.github.io
 ```
