@@ -5,6 +5,7 @@
 `注意：我个人是在golang1.8.3环境下封装的，其他版本不确定会不会有问题`
 
 ```
+$ go get -v github.com/gomodule/redigo/redis
 $ go get -v github.com/xxbandy/redis-op/pool
 $ cat test-conn.go
 package main
