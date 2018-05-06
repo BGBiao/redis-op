@@ -3,7 +3,7 @@
  * @Author: xxbandy @http://xxbandy.github.io 
  * @Email:
  * @Create Date: 2018-04-04 08:04:55
- * @Last Modified: 2018-04-09 23:04:59
+ * @Last Modified: 2018-05-06 18:05:15
  * @Description: 使用redis的连接池封装pub/sub的消息发布者
  */
 package main
@@ -109,7 +109,7 @@ func main() {
     //使用newPool构建一个redis连接池
     pool := newPool("localhost","32771","123qweasd")
     defer pool.Close()
-    //publish(pool,"ansible-key","172.25.60.148")
+    //publish(pool,"ansible-key","10.0.0.1")
     listenandSubscribe(pool,"ansible-key")
 
 }

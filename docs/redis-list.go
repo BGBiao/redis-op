@@ -3,7 +3,7 @@
  * @Author: xxbandy @http://xxbandy.github.io 
  * @Email:
  * @Create Date: 2018-04-04 08:04:55
- * @Last Modified: 2018-04-11 23:04:28
+ * @Last Modified: 2018-05-06 19:05:00
  * @Description: 使用lpush和rpop进行操作ansible队列
  //使用redis的list功能实现队列消费
  */
@@ -65,6 +65,20 @@ func main() {
             }
         switch {
         case int(llen) > 0:
+            //使用rpop每次只能取出list中的尾部元素，这样效率上比较低效，可以使用并发去提高效率，但是list中其实提供了`lrange key 0 -1`来获取全部元素
+            //而后需要使用`del key`来删除并清空list，但是这样控制不好的话并发可能会误删除？每次取的时候加锁？
+            /*
+            lrangeO,lrangeErr := redis.Strings(conn.Do("lrange",redis.Args{}.Add("ansible-key").AddFlat(0).AddFlat(-1)...))
+            if lrangeErr == nil {
+                delID,_ := redis.Int(conn.Do("del","ansible-key"))
+                for _,v := range lrangeO {
+                    fmt.Printf("ip %s",v)
+                }
+                //delID的结果为0、或1(表示删除成功)
+                if delID == 1 { fmt.Println("del done.") }
+            }
+
+            */
             r,_ := redis.String(c.Do("rpop","ansible-key"))
             fmt.Println("ansible-key: ",r)
         default:

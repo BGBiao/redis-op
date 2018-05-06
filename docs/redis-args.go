@@ -3,7 +3,7 @@
  * @Author: xxbandy @http://xxbandy.github.io 
  * @Email:
  * @Create Date: 2018-04-13 17:04:45
- * @Last Modified: 2018-04-13 17:04:46
+ * @Last Modified: 2018-05-06 15:05:29
  * @Description:
  */
 
@@ -15,8 +15,8 @@ import (
 )
 
 func main() {
-    allip := "172.25.60.148 172.25.60.149"
-    pool := redisop.NewPool("localhost","32771","123qweasd")
+    allip := "10.0.0.1"
+    pool := redisop.NewPool("localhost","32771","")
     defer pool.Close()
     conn := pool.Get()
     defer conn.Close()
